@@ -23,7 +23,8 @@ const App: React.FC = () => {
   setLoading(true);
   setData(null);
   try {
-    const res = await axios.get<PingResponse>(`http://localhost:8080/api/ping?ip=${value}&edition=${edition}`);
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+    const res = await axios.get<PingResponse>(`${apiBaseUrl}/api/ping?ip=${value}&edition=${edition}`);
     setData(res.data);
     message.success(`解析完成 (${edition === 'java' ? 'Java版' : '基岩版'})`);
   } catch (error) {
